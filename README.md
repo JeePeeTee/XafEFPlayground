@@ -3,7 +3,7 @@
 XafPlayground is a sample project to demonstrate the use of Entity Framework Core in XAF.
 
 This solution makes use of the following additional modules:
-- SonarAnalyzer for C# (https://www.sonarlint.org)
+- SonarAnalyzer for C# (https://rules.sonarsource.com/csharp/)
   - Configuration is done global within the file: Directory.Build.props. In production we set TreatWarningsAsErrors and CodeAnalysisTreatWarningsAsErrors to true.
 - Entity Framework Core Exceptions for MS SQL Server
   - Instead of using DbUpdateException a more specific exception like UniqueConstraintException can be used.
