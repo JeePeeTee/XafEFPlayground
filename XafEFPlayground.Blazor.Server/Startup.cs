@@ -152,7 +152,8 @@ public class Startup {
             c.SwaggerDoc("v1", new OpenApiInfo {
                 Title = "XafEFPlaygound API",
                 Version = "v1",
-                Description = @"Use AddXafWebApi(options) in the XafEFPlayground.Blazor.Server\Startup.cs file to make Business Objects available in the Web API."
+                Description =
+                    @"Use AddXafWebApi(options) in the XafEFPlayground.Blazor.Server\Startup.cs file to make Business Objects available in the Web API."
             });
             c.AddSecurityDefinition("JWT", new OpenApiSecurityScheme() {
                 Type = SecuritySchemeType.Http,

@@ -120,7 +120,7 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
             .HasMany(t => t.Aspects)
             .WithOne(t => t.Owner)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         /* Configure your own tables/entities inside here */
 
         BookConfiguration.BookConfuguration(modelBuilder);

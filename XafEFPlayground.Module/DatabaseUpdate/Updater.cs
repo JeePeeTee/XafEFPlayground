@@ -77,7 +77,7 @@ public class Updater : ModuleUpdater {
 
     public override void UpdateDatabaseBeforeUpdateSchema() {
         base.UpdateDatabaseBeforeUpdateSchema();
-        
+
         // SampleEFCoreDeleteBookV1();
         // SampleEFCoreDeleteBookV2();
         // SampleEFCoreDeleteBookV3();
@@ -112,19 +112,19 @@ public class Updater : ModuleUpdater {
         var context = ((EFCoreObjectSpace)ObjectSpace).DbContext as XafEFPlaygoundEFCoreDbContext;
 
         var id = context.Book.FirstOrDefaultAsync().Result.ID;
-        
+
         await context!.Book.Where(w => w.ID == id).ExecuteDeleteAsync();
     }
 
     private async void SampleEFCoreDeleteBookV2() {
         var context = ((EFCoreObjectSpace)ObjectSpace).DbContext as XafEFPlaygoundEFCoreDbContext;
-        
+
         var id = context.Book.FirstOrDefaultAsync().Result.ID;
-        
+
         var book = new Book() { ID = id };
         var bookEntity = context!.Book.Attach(book);
         bookEntity.State = EntityState.Deleted;
-        
+
         await context.SaveChangesAsync();
 
         throw new NotImplementedException();
@@ -132,15 +132,15 @@ public class Updater : ModuleUpdater {
 
     private async void SampleEFCoreDeleteBookV1() {
         var context = ((EFCoreObjectSpace)ObjectSpace).DbContext as XafEFPlaygoundEFCoreDbContext;
-        
+
         var id = context.Book.FirstOrDefaultAsync().Result.ID;
 
         var book = await context!.Book.FindAsync(id);
-        
+
         if (book is null) return;
-        
+
         context.Book.Remove(book);
-        
+
         await context.SaveChangesAsync();
     }
 

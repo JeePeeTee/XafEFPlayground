@@ -8,15 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\XafEFPlayground.Module\XafEFPlayground.Module.csproj" />
+        <ProjectReference Include="..\XafEFPlayground.Module\XafEFPlayground.Module.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.3" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.3"/>
     </ItemGroup>
 
     <ItemGroup>
