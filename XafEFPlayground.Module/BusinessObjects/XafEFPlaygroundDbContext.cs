@@ -39,6 +39,7 @@ using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using XafEFPlayground.Module.Configuration;
+using XafEFPlayground.Module.Configuration.Xaf;
 using XafEFPlayground.Module.Entities;
 
 #endregion
@@ -93,8 +94,15 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
     public DbSet<Analysis> Analysis { get; set; }
 
     public DbSet<Book> Book { get; set; }
+    
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken)) {
+        UpdateSoftDeleteStatuses();
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
 
     public override int SaveChanges() {
+        UpdateSoftDeleteStatuses();
+        
         var entities = ChangeTracker
             .Entries()
             .Where(e => e.Entity is IAuditedObject && (
@@ -125,11 +133,66 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
             }
         }
 
-        return base.SaveChanges();
+        try {
+            return base.SaveChanges();
+        }
+        catch (Exception ex) {
+            if (ex is DbUpdateConcurrencyException) {
+                throw new UserFriendlyException(
+                    "The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded.");
+            }
+
+            if (ex is DbUpdateException) {
+                var inner = ex.InnerException;
+            }
+
+            throw;
+        }
     }
 
+    private void UpdateSoftDeleteStatuses() {
+        foreach (var entry in ChangeTracker.Entries()) {
+            if (entry.Entity is BaseObjectWithAudit) {
+                switch (entry.State) {
+                    case EntityState.Added:
+                        entry.CurrentValues["IsDeleted"] = false;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.CurrentValues["IsDeleted"] = true;
+                        entry.CurrentValues["Deleted"] = DateTime.Now;
+                        entry.CurrentValues["DeletedBy"] = SecuritySystem.Instance?.UserName;
+                        break;
+                }
+            }
+        }
+    }
+    
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) {
+        configurationBuilder.Properties<string>().HaveColumnType("nvarchar(100)");
+        configurationBuilder.Properties<decimal>().HaveColumnType("money");
+    }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
+        
+        // XAF entity configurations
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationUserLoginInfoConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AuditDataItemPersistentConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AuditEfCoreWeakReferenceConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DashboardDataConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(KpiDefinitionConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(KpiInstanceConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelDifferenceAspectConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelDifferenceConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PermissionPolicyMemberPermissionsObjectConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PermissionPolicyNavigationPermissionObjectConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PermissionPolicyObjectPermissionsObjectConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ReportDataV2Configuration).Assembly);
+
+        // My Solution entities configurations
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookConfiguration).Assembly);
+
         modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
         modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
         modelBuilder.Entity<ApplicationUserLoginInfo>(b => {
@@ -155,7 +218,7 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
 
         /* Configure your own tables/entities inside here */
 
-        new BookConfiguration().Configure(modelBuilder.Entity<Book>());
+        //new BookConfiguration().Configure(modelBuilder.Entity<Book>());
     }
 }
 
