@@ -155,7 +155,7 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
 
         /* Configure your own tables/entities inside here */
 
-        BookConfiguration.BookConfuguration(modelBuilder);
+        new BookConfiguration().Configure(modelBuilder.Entity<Book>());
     }
 }
 
