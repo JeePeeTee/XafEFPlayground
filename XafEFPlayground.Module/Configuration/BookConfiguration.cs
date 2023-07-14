@@ -2,7 +2,7 @@
 
 // ==========================================================
 // 
-// XafEFPlayground project - Copyright (c) 2023 JeePeeTee
+// XafEFPlayground project - Copyright (c) 2023 XAFers Arizona User Group
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,12 +39,12 @@ namespace XafEFPlayground.Module.Configuration;
 
 public class BookConfiguration : IEntityTypeConfiguration<Book> {
     public void Configure(EntityTypeBuilder<Book> builder) {
-            builder.ToTable(XafEfPlaygroundConsts.DbTablePrefix + "Book", XafEfPlaygroundConsts.DbSchema);
-            builder.ConfigureMyConventions(); //auto configure base class properties
-            builder.Property(x => x.BookTitle).IsRequired().HasMaxLength(128);
-            builder.Property<bool>("IsDeleted");
-            builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
-            builder.Property<decimal>("BasePrice").HasDefaultValue(0).HasColumnType("money");
-            builder.HasIndex(e => e.BookTitle).IsUnique();
-        }
+        builder.ToTable(XafEfPlaygroundConsts.DbTablePrefix + "Book", XafEfPlaygroundConsts.DbSchema);
+        builder.ConfigureMyConventions(); //auto configure base class properties
+        builder.Property(x => x.BookTitle).IsRequired().HasMaxLength(128);
+        builder.Property<bool>("IsDeleted");
+        builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+        builder.Property<decimal>("BasePrice").HasDefaultValue(0).HasColumnType("money");
+        builder.HasIndex(e => e.BookTitle).IsUnique();
+    }
 }

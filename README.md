@@ -19,11 +19,10 @@ This solution makes use of the following additional modules:
 - [ ] #740
 - [ ] #741
 
-## Features ToDo
+## ToDo/Done
 
-- [ ] https://github.com/octo-org/octo-repo/issues/740
-- [ ] Add logic/code for soft-delete support :tada:
-- [ ] Add logic/code concurrency support :tada:
+- [x] Add logic/code for soft-delete support :tada:
+- [x] Add logic/code concurrency support :tada:
 
 ## Discussions
 

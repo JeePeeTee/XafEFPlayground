@@ -2,7 +2,7 @@
 
 // ==========================================================
 // 
-// XafEFPlayground project - Copyright (c) 2023 JeePeeTee
+// XafEFPlayground project - Copyright (c) 2023 XAFers Arizona User Group
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -94,7 +94,7 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
     public DbSet<Analysis> Analysis { get; set; }
 
     public DbSet<Book> Book { get; set; }
-    
+
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken)) {
         UpdateSoftDeleteStatuses();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
@@ -102,7 +102,7 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
 
     public override int SaveChanges() {
         UpdateSoftDeleteStatuses();
-        
+
         var entities = ChangeTracker
             .Entries()
             .Where(e => e.Entity is IAuditedObject && (
@@ -167,31 +167,31 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
             }
         }
     }
-    
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) {
         configurationBuilder.Properties<string>().HaveColumnType("nvarchar(100)");
         configurationBuilder.Properties<decimal>().HaveColumnType("money");
     }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
-        
+
         // XAF entity configurations
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationUserLoginInfoConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AuditDataItemPersistentConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AuditEfCoreWeakReferenceConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DashboardDataConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(KpiDefinitionConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(KpiInstanceConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelDifferenceAspectConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelDifferenceConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PermissionPolicyMemberPermissionsObjectConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PermissionPolicyNavigationPermissionObjectConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PermissionPolicyObjectPermissionsObjectConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ReportDataV2Configuration).Assembly);
+        modelBuilder.ApplyConfiguration(new ApplicationUserLoginInfoConfiguration());
+        modelBuilder.ApplyConfiguration(new AuditDataItemPersistentConfiguration());
+        modelBuilder.ApplyConfiguration(new AuditEfCoreWeakReferenceConfiguration());
+        modelBuilder.ApplyConfiguration(new DashboardDataConfiguration());
+        modelBuilder.ApplyConfiguration(new KpiDefinitionConfiguration());
+        modelBuilder.ApplyConfiguration(new KpiInstanceConfiguration());
+        modelBuilder.ApplyConfiguration(new ModelDifferenceAspectConfiguration());
+        modelBuilder.ApplyConfiguration(new ModelDifferenceConfiguration());
+        modelBuilder.ApplyConfiguration(new PermissionPolicyMemberPermissionsObjectConfiguration());
+        modelBuilder.ApplyConfiguration(new PermissionPolicyNavigationPermissionObjectConfiguration());
+        modelBuilder.ApplyConfiguration(new PermissionPolicyObjectPermissionsObjectConfiguration());
+        modelBuilder.ApplyConfiguration(new ReportDataV2Configuration());
 
         // My Solution entities configurations
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookConfiguration).Assembly);
+        modelBuilder.ApplyConfiguration(new BookConfiguration());
 
         modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
         modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
