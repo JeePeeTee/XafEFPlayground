@@ -35,16 +35,16 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Criteria")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DimensionPropertiesString")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ObjectTypeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<byte[]>("PivotGridSettingsContent")
                         .HasColumnType("varbinary(max)");
@@ -67,7 +67,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -87,7 +87,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("EndOn")
                         .HasColumnType("datetime2");
@@ -99,11 +99,11 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RecurrenceInfoXml")
                         .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid?>("RecurrencePatternID")
                         .HasColumnType("uniqueidentifier");
@@ -113,7 +113,7 @@ namespace XafEFPlayground.Module.Migrations
 
                     b.Property<string>("ReminderInfoXml")
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("StartOn")
                         .HasColumnType("datetime2");
@@ -122,7 +122,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -144,7 +144,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Size")
                         .HasColumnType("int");
@@ -191,22 +191,22 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RangeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RangeToCompareName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<float>("RedZone")
                         .HasColumnType("real");
 
                     b.Property<string>("SuppressedSeries")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("TargetObjectTypeFullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -268,7 +268,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -282,10 +282,10 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ContextId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Version")
                         .HasColumnType("int");
@@ -302,7 +302,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid?>("OwnerID")
                         .HasColumnType("uniqueidentifier");
@@ -324,7 +324,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ActionId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid?>("RoleID")
                         .HasColumnType("uniqueidentifier");
@@ -380,7 +380,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TargetTypeFullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -431,7 +431,7 @@ namespace XafEFPlayground.Module.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsAdministrative")
                         .HasColumnType("bit");
@@ -440,7 +440,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("PermissionPolicy")
                         .HasColumnType("int");
@@ -476,7 +476,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TargetTypeFullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("WriteState")
                         .HasColumnType("int");
@@ -499,16 +499,16 @@ namespace XafEFPlayground.Module.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("StoredPassword")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -529,19 +529,19 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("DataTypeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsInplaceReport")
                         .HasColumnType("bit");
 
                     b.Property<string>("ParametersObjectTypeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("PredefinedReportTypeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(512)");
 
                     b.HasKey("ID");
 
@@ -555,7 +555,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Caption")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Color_Int")
                         .HasColumnType("int");
@@ -575,7 +575,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -593,10 +593,10 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OperationType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PropertyName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid?>("UserObjectID")
                         .HasColumnType("uniqueidentifier");
@@ -621,16 +621,16 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DefaultString")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Key")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -691,10 +691,10 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProviderName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ProviderUserKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid>("UserForeignKey")
                         .HasColumnType("uniqueidentifier");
@@ -724,7 +724,7 @@ namespace XafEFPlayground.Module.Migrations
                     b.Property<string>("BookTitle")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("Created")
                         .IsRequired()
@@ -732,7 +732,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnName("Created");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("CreatedBy");
 
                     b.Property<DateTime?>("Deleted")
@@ -740,7 +740,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnName("Deleted");
 
                     b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("DeletedBy");
 
                     b.Property<bool>("IsDeleted")
@@ -754,7 +754,7 @@ namespace XafEFPlayground.Module.Migrations
                         .HasColumnName("LastModified");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("LastModifiedBy");
 
                     b.Property<DateTime?>("PublishDate")

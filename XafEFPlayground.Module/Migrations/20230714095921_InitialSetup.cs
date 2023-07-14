@@ -16,10 +16,10 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Criteria = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ObjectTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DimensionPropertiesString = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Criteria = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    ObjectTypeName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    DimensionPropertiesString = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     PivotGridSettingsContent = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     ChartSettingsContent = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
@@ -33,9 +33,9 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeName = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Key = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DefaultString = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Key = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    DefaultString = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -49,7 +49,7 @@ namespace XafEFPlayground.Module.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     SynchronizeTitle = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -62,12 +62,12 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Subject = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     StartOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AllDay = table.Column<bool>(type: "bit", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Label = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
@@ -94,7 +94,7 @@ namespace XafEFPlayground.Module.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Content = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
@@ -107,21 +107,21 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Active = table.Column<bool>(type: "bit", nullable: false),
-                    TargetObjectTypeFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TargetObjectTypeFullName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Criteria = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Expression = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GreenZone = table.Column<float>(type: "real", nullable: false),
                     RedZone = table.Column<float>(type: "real", nullable: false),
                     Compare = table.Column<bool>(type: "bit", nullable: false),
-                    RangeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RangeToCompareName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RangeName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    RangeToCompareName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     MeasurementFrequency = table.Column<int>(type: "int", nullable: false),
                     MeasurementMode = table.Column<int>(type: "int", nullable: false),
                     Direction = table.Column<int>(type: "int", nullable: false),
                     ChangedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SuppressedSeries = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SuppressedSeries = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     EnableCustomizeRepresentation = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -134,7 +134,7 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -146,8 +146,8 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContextId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    ContextId = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -164,11 +164,11 @@ namespace XafEFPlayground.Module.Migrations
                     PublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BasePrice = table.Column<decimal>(type: "money", nullable: false, defaultValue: 0m),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Deleted = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -182,12 +182,12 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     IsAdministrative = table.Column<bool>(type: "bit", nullable: false),
                     CanEditModel = table.Column<bool>(type: "bit", nullable: false),
                     PermissionPolicy = table.Column<int>(type: "int", nullable: false),
                     IsAllowPermissionPriority = table.Column<bool>(type: "bit", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Discriminator = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,11 +199,11 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     ChangePasswordOnFirstLogon = table.Column<bool>(type: "bit", nullable: false),
-                    StoredPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    StoredPassword = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Discriminator = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,12 +215,12 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DataTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataTypeName = table.Column<string>(type: "nvarchar(512)", nullable: true),
                     IsInplaceReport = table.Column<bool>(type: "bit", nullable: false),
-                    PredefinedReportTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PredefinedReportTypeName = table.Column<string>(type: "nvarchar(512)", nullable: true),
                     Content = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParametersObjectTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DisplayName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    ParametersObjectTypeName = table.Column<string>(type: "nvarchar(512)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,7 +232,7 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     Key = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Caption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Caption = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Color_Int = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -246,11 +246,11 @@ namespace XafEFPlayground.Module.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OperationType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PropertyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OperationType = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    PropertyName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     OldValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NewValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(2048)", nullable: true),
                     AuditedObjectID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     OldObjectID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     NewObjectID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -306,7 +306,7 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Xml = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OwnerID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -327,7 +327,7 @@ namespace XafEFPlayground.Module.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoleID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ActionId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ActionId = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -346,7 +346,7 @@ namespace XafEFPlayground.Module.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoleID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ItemPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TargetTypeFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TargetTypeFullName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     NavigateState = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -364,7 +364,7 @@ namespace XafEFPlayground.Module.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TargetTypeFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TargetTypeFullName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     RoleID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReadState = table.Column<int>(type: "int", nullable: true),
                     WriteState = table.Column<int>(type: "int", nullable: true),
@@ -412,8 +412,8 @@ namespace XafEFPlayground.Module.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoginProviderName = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ProviderUserKey = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    LoginProviderName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    ProviderUserKey = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
