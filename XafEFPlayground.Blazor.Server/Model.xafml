@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems NavigationStyle="Accordion">
+    <Items>
+      <Item Id="KPI" Removed="True" />
+      <Item Id="Reports">
+        <Items>
+          <Item Id="Analysis_ListView" Removed="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
+  </Views>
+</Application>
