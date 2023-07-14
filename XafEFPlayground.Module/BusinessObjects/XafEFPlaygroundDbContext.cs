@@ -35,9 +35,11 @@ using DevExpress.Persistent.BaseImpl.EF;
 using DevExpress.Persistent.BaseImpl.EF.Kpi;
 using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
 using DevExpress.Persistent.BaseImpl.EFCore.AuditTrail;
+using EntityFramework.Exceptions.Common;
 using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Metadata;
 using XafEFPlayground.Module.Configuration;
 using XafEFPlayground.Module.Configuration.Xaf;
 using XafEFPlayground.Module.Entities;
@@ -53,8 +55,8 @@ public class XafEFPlaygoundContextInitializer : DbContextTypesInfoInitializerBas
         var optionsBuilder = new DbContextOptionsBuilder<XafEFPlaygoundEFCoreDbContext>()
             .UseSqlServer(";")
             .UseChangeTrackingProxies()
-            .UseObjectSpaceLinkProxies()
-            .UseExceptionProcessor();
+            .UseObjectSpaceLinkProxies();
+            //.UseExceptionProcessor();
         return new XafEFPlaygoundEFCoreDbContext(optionsBuilder.Options);
     }
 }
@@ -137,17 +139,28 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
             return base.SaveChanges();
         }
         catch (Exception ex) {
-            if (ex is DbUpdateConcurrencyException) {
-                throw new UserFriendlyException(
-                    "The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded.");
+            switch (ex) {
+                case DbUpdateConcurrencyException:
+                    throw new UserFriendlyException(
+                        "The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded.");
+                case UniqueConstraintException uniqueConstraintException: {
+                    // This unique constraint exception message lacks details.
+                    var message = uniqueConstraintException.InnerException?.Message;
+                    throw new UserFriendlyException(message);
+                }
+                case DbUpdateException dbUpdateException: {
+                    var message = dbUpdateException.InnerException?.Message;
+                    throw new UserFriendlyException(message);
+                }
+                default:
+                    throw;
             }
-
-            if (ex is DbUpdateException) {
-                var inner = ex.InnerException;
-            }
-
-            throw;
         }
+    }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseExceptionProcessor();
     }
 
     private void UpdateSoftDeleteStatuses() {
