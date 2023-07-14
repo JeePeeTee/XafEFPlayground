@@ -1,9 +1,8 @@
 ﻿@page "/"
-@namespace XafEFPlayground.Blazor.Server.Pages
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using DevExpress.ExpressApp.Blazor.Components
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@using XafEFPlayground.Blazor.Server
+@namespace XafEFPlayground.Blazor.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +19,7 @@
 <body>
 @{
     string userAgent = Request.Headers["User-Agent"];
-    bool isIE = userAgent.Contains("MSIE") || userAgent.Contains("Trident");
+    var isIE = userAgent.Contains("MSIE") || userAgent.Contains("Trident");
 }
 @if (isIE) {
     <link href="css/site.css" rel="stylesheet"/>

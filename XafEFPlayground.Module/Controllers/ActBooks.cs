@@ -2,7 +2,7 @@
 
 // ==========================================================
 // 
-// XafEFPlaygound project - Copyright (c) 2023 JeePeeTee
+// XafEFPlayground project - Copyright (c) 2023 JeePeeTee
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,15 @@
 
 #endregion
 
+#region usings
+
 using System.ComponentModel;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.Persistent.Base;
 using XafEFPlayground.Module.BusinessObjects;
+
+#endregion
 
 namespace XafEFPlayground.Module.Controllers;
 
@@ -40,6 +44,34 @@ public class ActBooks : ViewController {
     public ActBooks() {
         this.components = new Container();
         InitializeCreateData();
+    }
+
+
+    protected override void OnActivated() {
+        base.OnActivated();
+        // Perform various tasks depending on the target View.
+    }
+
+    protected override void OnViewControlsCreated() {
+        base.OnViewControlsCreated();
+        // Access and customize the target View control.
+    }
+
+    protected override void OnDeactivated() {
+        // Unsubscribe from previously subscribed events and release other references and resources.
+        base.OnDeactivated();
+    }
+
+    protected override void Dispose(bool disposing) {
+        if (disposing) {
+            foreach (var action in this.Actions) {
+                action.Dispose();
+            }
+
+            components?.Dispose();
+        }
+
+        base.Dispose(disposing);
     }
 
     // New actions here... check templates actsmpl, act...
@@ -71,7 +103,7 @@ public class ActBooks : ViewController {
         void CreateDataExecute(object sender, SimpleActionExecuteEventArgs e) {
             using var ios = Application.CreateObjectSpace(typeof(Book));
 
-            for (int i = 0; i < 5000; i++) {
+            for (var i = 0; i < 5000; i++) {
                 var record = ios.CreateObject<Book>();
                 record.BookTitle = $"Book {i}";
                 record.BasePrice = 9.95m;
@@ -85,32 +117,4 @@ public class ActBooks : ViewController {
     }
 
     #endregion Simple action: CreateData
-
-
-    protected override void OnActivated() {
-        base.OnActivated();
-        // Perform various tasks depending on the target View.
-    }
-
-    protected override void OnViewControlsCreated() {
-        base.OnViewControlsCreated();
-        // Access and customize the target View control.
-    }
-
-    protected override void OnDeactivated() {
-        // Unsubscribe from previously subscribed events and release other references and resources.
-        base.OnDeactivated();
-    }
-
-    protected override void Dispose(bool disposing) {
-        if (disposing) {
-            foreach (var action in this.Actions) {
-                action.Dispose();
-            }
-
-            components?.Dispose();
-        }
-
-        base.Dispose(disposing);
-    }
 }
