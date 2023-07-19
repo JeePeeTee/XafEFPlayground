@@ -33,6 +33,7 @@ using DevExpress.ExpressApp.Filtering;
 using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl.EF;
+using DevExpress.Xpo;
 using XafEFPlayground.Module.Auditing;
 using XafEFPlayground.Module.Entities;
 
@@ -109,27 +110,5 @@ public abstract class BaseObjectWithAudit : BaseObject, IHaveConcurrencyStamp, I
 
     private static string GetCurrentUserName() => SecuritySystem.Instance?.UserName;
 
-    /* Behaviour moved to DBContext 12-7-2023
-    public override void OnSaving() {
-        base.OnSaving();
-
-        if (ObjectSpace.IsNewObject(this)) {
-            Created = DateTime.Now;
-            CreatedBy = GetCurrentUserName() ?? "(Automated)";
-        }
-        // OnDeleting does some extra tricks via Global OnSaving with SoftDelete
-        else if (ObjectSpace.IsObjectToDelete(this)) {
-            Deleted = DateTime.Now;
-            DeletedBy = GetCurrentUserName() ?? "(Automated)";
-        }
-        else {
-            LastModified = DateTime.Now;
-            LastModifiedBy = GetCurrentUserName() ?? "(Automated)";
-        }
-    }
-    */
-
-    public override void OnLoaded() {
-        base.OnLoaded();
-    }
+    // OnSaving Behaviour moved to DBContext 12-7-2023
 }
