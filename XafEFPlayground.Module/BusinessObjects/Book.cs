@@ -30,6 +30,7 @@
 
 using System.ComponentModel;
 using DevExpress.Persistent.Base;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 #endregion
 
@@ -43,4 +44,18 @@ public class Book : BaseObjectWithAudit {
     public virtual string BookTitle { get; set; }
     public virtual DateTime? PublishDate { get; set; }
     public virtual decimal BasePrice { get; set; }
+}
+
+public class BookSavingChangesInterceptor : SaveChangesInterceptor {
+    // Called at the start of DbContext.SaveChanges.
+    public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result) {
+        if (eventData?.Context is null ||
+            !eventData.Context.ChangeTracker.Entries<Book>().Any())
+            return base.SavingChanges(eventData, result);
+
+        var oldBookTitle = eventData.Context.ChangeTracker.Entries<Book>().FirstOrDefault()?.Property(p => p.BookTitle).OriginalValue;
+        var newBookTitle = eventData.Context.ChangeTracker.Entries<Book>().FirstOrDefault()?.Property(p => p.BookTitle).CurrentValue;
+
+        return base.SavingChanges(eventData, result);
+    }
 }
