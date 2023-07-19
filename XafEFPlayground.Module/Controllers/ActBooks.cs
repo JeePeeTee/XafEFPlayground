@@ -31,7 +31,9 @@
 using System.ComponentModel;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
+using DevExpress.ExpressApp.EFCore;
 using DevExpress.Persistent.Base;
+using Microsoft.EntityFrameworkCore;
 using XafEFPlayground.Module.BusinessObjects;
 
 #endregion
@@ -100,7 +102,7 @@ public class ActBooks : ViewController {
         void CreateDataExecute(object sender, SimpleActionExecuteEventArgs e) {
             using var ios = Application.CreateObjectSpace(typeof(Book));
 
-            for (var i = 0; i < 5000; i++) {
+            for (var i = 1; i <= 5000; i++) {
                 var record = ios.CreateObject<Book>();
                 record.BookTitle = $"Book {i}";
                 record.BasePrice = 9.95m;
