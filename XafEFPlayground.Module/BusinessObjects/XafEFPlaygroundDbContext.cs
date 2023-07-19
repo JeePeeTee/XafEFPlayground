@@ -39,7 +39,6 @@ using EntityFramework.Exceptions.Common;
 using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Metadata;
 using XafEFPlayground.Module.Configuration;
 using XafEFPlayground.Module.Configuration.Xaf;
 using XafEFPlayground.Module.Entities;
@@ -56,7 +55,6 @@ public class XafEFPlaygoundContextInitializer : DbContextTypesInfoInitializerBas
             .UseSqlServer(";")
             .UseChangeTrackingProxies()
             .UseObjectSpaceLinkProxies();
-            //.UseExceptionProcessor();
         return new XafEFPlaygoundEFCoreDbContext(optionsBuilder.Options);
     }
 }
@@ -157,9 +155,9 @@ public class XafEFPlaygoundEFCoreDbContext : DbContext {
             }
         }
     }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.AddInterceptors(new BookSavingChangesInterceptor());
         optionsBuilder.UseExceptionProcessor();
     }
 
