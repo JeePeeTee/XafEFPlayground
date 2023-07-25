@@ -29,6 +29,7 @@
 #region usings
 
 using System.ComponentModel;
+using System.Diagnostics;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.EFCore;
@@ -46,6 +47,7 @@ public class ActBooks : ViewController {
     public ActBooks() {
         this.components = new Container();
         InitializeCreateData();
+        InitializeCoolFeature();
     }
 
 
@@ -116,4 +118,54 @@ public class ActBooks : ViewController {
     }
 
     #endregion Simple action: CreateData
+
+    #region Simple action: CoolFeature
+    
+    private SimpleAction _coolFeature;
+
+    private void InitializeCoolFeature() {
+        _coolFeature = new SimpleAction(this, nameof(_coolFeature), PredefinedCategory.View) {
+            Caption = "Cool Feature",
+            ConfirmationMessage = null,
+            ImageName = "ModelEditor_Application",
+            SelectionDependencyType = SelectionDependencyType.RequireMultipleObjects,
+            ToolTip = null,
+            TargetObjectType = typeof(Book),
+            TargetViewType = ViewType.ListView,
+            TargetViewNesting = Nesting.Root,
+            TargetObjectsCriteriaMode = TargetObjectsCriteriaMode.TrueAtLeastForOne,
+        };
+
+        _coolFeature.Execute += CoolFeatureExecute;
+
+        this.Actions.Add(_coolFeature);
+
+        void CoolFeatureExecute(object sender, SimpleActionExecuteEventArgs e) {
+            using var ios = Application.CreateObjectSpace();
+            
+            // Hack: Objectspace doesn't affect the DbContext directly, so we need to get it and use it directly 
+            
+            var context = ((EFCoreObjectSpace)ios).DbContext as XafEFPlaygoundEFCoreDbContext;
+            
+            var selectedBooks = e.SelectedObjects.Cast<Book>().Select(s=>s.ID).ToList();
+            
+            var books = context.Book.Where(w=>selectedBooks.Contains(w.ID)).ToList();
+            foreach (var book in books) {
+                book.BasePrice = 19.95m;
+            }
+
+            Debug.WriteLine("Before: " + context.ChangeTracker.DebugView.ShortView);
+            context.ChangeTracker.DetectChanges();
+            Debug.WriteLine("After: " + context.ChangeTracker.DebugView.ShortView);
+
+            ios.CommitChanges();
+
+            View.Refresh(true);
+
+            
+        }
+    }
+
+    #endregion Simple action: CoolFeature
+
 }
