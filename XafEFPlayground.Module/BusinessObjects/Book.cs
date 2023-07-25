@@ -53,6 +53,18 @@ public class BookSavingChangesInterceptor : SaveChangesInterceptor {
             !eventData.Context.ChangeTracker.Entries<Book>().Any())
             return base.SavingChanges(eventData, result);
 
+        var entries = eventData.Context.ChangeTracker.Entries<Book>();
+
+        foreach (var entry in entries) {
+            var results = entry.Properties
+                .Where(prop => prop.IsModified)
+                .Select(prop => new {
+                    Property = prop.Metadata,
+                    OldValue = prop.OriginalValue,
+                    NewValue = prop.CurrentValue,
+                }).ToList();
+        }
+        
         var oldBookTitle = eventData.Context.ChangeTracker.Entries<Book>().FirstOrDefault()?.Property(p => p.BookTitle).OriginalValue;
         var newBookTitle = eventData.Context.ChangeTracker.Entries<Book>().FirstOrDefault()?.Property(p => p.BookTitle).CurrentValue;
 
